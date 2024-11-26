@@ -1,0 +1,736 @@
+/* Variables globales */
+:root {
+    /* Tema oscuro */
+    --main-bg: #121212;
+    --text-color: #fff;
+    --hover-bg: #444;
+    --input-bg: #333;  /* Fondo de la barra de búsqueda */
+    --input-border: #555;  /* Borde de la barra de búsqueda */
+    --top-bar-bg: #212121; /* Barra superior oscura */
+    --hover-bg-dark: #666;
+
+    /* Tema claro */
+    --light-bg: #f9f9f9;
+    --light-text: #333;
+    --light-hover: #ddd;
+    --light-hover-dark: #bbb;
+    --light-top-bar-bg: #e0e0e0; /* Barra superior clara */
+}
+
+/* Resetear márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding-top: 60px; /* Para que no se solapen con el header fijo */
+}
+
+/* Título de la sección 'Top Animes' */
+.top-animes h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffcc00;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 100px; /* Aumentar el espacio superior */
+}
+
+/* Contenedor de las tarjetas de anime */
+.anime-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    justify-items: center;
+}
+
+/* Estilo para las tarjetas de anime */
+.anime-card {
+    position: relative;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Efecto Hover en las tarjetas */
+.anime-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen de fondo con efecto de hover */
+.anime-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Sombra sobre la imagen en hover */
+.anime-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Contenedor de texto */
+.anime-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    transition: background 0.3s ease;
+}
+
+/* Cambio de color del fondo en hover */
+.anime-card:hover .anime-info {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Título del anime */
+.anime-info h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #f5f5f5;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* Calificación y Género */
+.anime-info p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    color: #ddd;
+    margin: 5px 0;
+}
+
+/* Estilo de la calificación */
+.anime-info p.calificacion {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+/* Estilo para las estrellas */
+.anime-info .calificacion i {
+    color: #ffcc00;  /* Color dorado para las estrellas */
+    margin-right: 2px; /* Espaciado entre las estrellas */
+    font-size: 16px;   /* Tamaño adecuado para las estrellas */
+}
+
+/* Estilo para las estrellas vacías */
+.anime-info .calificacion .far.fa-star {
+    color: #ddd; /* Color gris para las estrellas vacías */
+}
+
+/* Estilo para las estrellas medias */
+.anime-info .calificacion .fas.fa-star-half-alt {
+    color: #ffcc00; /* Mismo color para la media estrella */
+}
+
+/* Fondo degradado en hover */
+.anime-card:hover {
+    background: linear-gradient(45deg, #ff3d00, #ff9100);
+}
+
+/* Añadir una sombra más sofisticada */
+.anime-card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Barra superior */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--top-bar-bg);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Contenedor de la barra superior */
+.top-bar-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: var(--text-color);
+}
+
+/* Estilo para el logo */
+.logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    margin-right: 20px;
+}
+
+/* Estilo para el título (Nombre del sitio) */
+h1 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 0;
+}
+
+/* Menú de navegación */
+.top-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.top-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover */
+.top-nav a:hover {
+    background-color: var(--hover-bg);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo del submenú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--top-bar-bg);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Efecto hover en el submenú */
+.dropdown-content a:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Mostrar el submenú cuando se pasa el ratón */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--hover-bg);
+}
+
+/* Barra de búsqueda */
+.search-bar input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 2px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    width: 250px;
+    transition: width 0.3s ease, border 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: var(--hover-bg);
+    outline: none;
+    width: 300px;
+}
+
+/* Estilo para los iconos */
+.top-bar-icons i {
+    font-size: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.top-bar-icons i:hover {
+    color: var(--hover-bg);
+}
+
+/* Tema claro */
+.light-mode {
+    --main-bg: var(--light-bg);
+    --text-color: var(--light-text);
+    --top-bar-bg: var(--light-top-bar-bg);
+    --hover-bg: var(--light-hover);
+    --hover-bg-dark: var(--light-hover-dark);
+}
+
+
+/* Variables globales */
+:root {
+    --main-bg: #121212;
+    --text-color: #fff;
+    --hover-bg: #444;
+    --input-bg: #555;  /* Fondo de la barra de búsqueda */
+    --input-border: #777;  /* Borde de la barra de búsqueda */
+
+    /* Tema claro */
+    --light-bg: #f9f9f9;
+    --light-text: #333;
+    --light-hover: #ddd;
+    --light-hover-dark: #bbb;
+
+    /* Colores de la barra superior */
+    --top-bar-bg: #222; /* Oscuro */
+    --light-top-bar-bg: #e0e0e0; /* Claro */
+}
+
+/* Resetear márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding-top: 60px; /* Para que no se solapen con el header fijo */
+}
+
+/* Barra superior */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--top-bar-bg);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Contenedor de la barra superior */
+.top-bar-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    color: var(--text-color);
+}
+
+/* Estilo para el logo */
+.logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    margin-right: 20px;
+}
+
+/* Estilo para el título (Nombre del sitio) */
+h1 {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 0;
+}
+
+/* Menú de navegación */
+.top-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.top-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover */
+.top-nav a:hover {
+    background-color: var(--hover-bg);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo del submenú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--top-bar-bg);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Efecto hover en el submenú */
+.dropdown-content a:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Mostrar el submenú cuando se pasa el ratón */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--hover-bg);
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Centrar el contenido */
+    align-items: center;
+}
+
+/* Estilo del input de la barra de búsqueda */
+.search-bar input {
+    padding: 12px 15px; /* Un poco más de padding para hacerlo más cómodo */
+    font-size: 16px;
+    border-radius: 30px; /* Bordes redondeados para un aspecto más suave */
+    border: 2px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    width: 300px; /* Establecer un ancho fijo y adecuado */
+    max-width: 100%;
+    transition: all 0.3s ease; /* Transiciones suaves para cualquier cambio */
+}
+
+/* Estilo del borde de la barra de búsqueda cuando está enfocada */
+.search-bar input:focus {
+    border-color: var(--hover-bg);
+    outline: none;
+    background-color: var(--top-bar-bg); /* Fondo ligeramente más oscuro cuando se enfoca */
+    box-shadow: 0 0 10px var(--hover-bg); /* Sombra para destacar el enfoque */
+}
+
+/* Agregar un ícono de búsqueda dentro del input */
+.search-bar input::placeholder {
+    color: var(--text-color); /* Color para el texto de placeholder */
+    opacity: 0.7; /* Un poco más tenue el texto placeholder */
+}
+
+/* Agregar un ícono dentro del input (ubicado a la izquierda) */
+.search-bar i {
+    position: absolute;
+    left: 15px; /* Separación desde el borde izquierdo */
+    font-size: 18px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Estilo de los resultados de búsqueda */
+#search-results {
+    position: absolute;
+    top: 60px; /* Alineación precisa debajo de la barra de búsqueda */
+    left: 0;
+    width: 300px; /* Igualar el ancho a la barra de búsqueda */
+    max-height: 250px;
+    overflow-y: auto;
+    background-color: var(--top-bar-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 999;
+}
+
+/* Mostrar resultados de búsqueda */
+#search-results.show {
+    display: block;
+}
+
+/* Estilo de cada ítem de los resultados de búsqueda */
+.search-result-item {
+    padding: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--input-border);
+    transition: background-color 0.3s ease;
+}
+
+/* Aseguramos que haya suficiente espacio entre la imagen y el nombre */
+.search-result-item img {
+    width: 40px;  /* Ancho fijo para la imagen */
+    height: 40px; /* Alto fijo para la imagen */
+    border-radius: 4px;
+    margin-right: 15px;  /* Espacio entre la imagen y el texto */
+}
+
+/* Efecto hover en los resultados */
+.search-result-item:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Estilo del título de los resultados de búsqueda */
+.search-result-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    flex-grow: 1; /* Esto asegurará que el texto ocupe el espacio restante */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el nombre es largo */
+}
+/* Estilo para los iconos */
+.top-bar-icons i {
+    font-size: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.top-bar-icons i:hover {
+    color: var(--hover-bg);
+}
+
+/* Tema claro */
+.light-mode {
+    --main-bg: var(--light-bg);
+    --text-color: var(--light-text);
+    --hover-bg: var(--light-hover);
+    --top-bar-bg: var(--light-top-bar-bg);
+}
+
+/* Estilos del Slider */
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 100px auto;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-images img {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.slider-navigation button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.slider-navigation .prev {
+    left: 10px;
+}
+
+.slider-navigation .next {
+    right: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    /* Para pantallas pequeñas, los elementos del menú deben apilarse */
+    .top-nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar input {
+        width: 200px; /* Ajusta el tamaño de la barra de búsqueda en dispositivos móviles */
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .top-bar-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+}
+
+
+/* Estilos del Slider */
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;  /* Ajusta según el ancho máximo que deseas para el slider */
+    margin: 100px auto;
+    overflow: hidden;  /* Para ocultar las imágenes que se salen del contenedor */
+}
+
+/* Contenedor de las imágenes */
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Contenedor de todas las imágenes del slider */
+.anime-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Cada imagen en el slider */
+.anime-slide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* Contenedor de la imagen */
+.anime-image {
+    flex-shrink: 0;
+    width: 30%; /* Ajusta el tamaño de la imagen (puedes modificar este valor) */
+    padding-right: 20px;  /* Separación entre la imagen y el nombre */
+}
+
+.anime-image img {
+    width: 100%;  /* La imagen ocupa el 100% del contenedor, ajustándose al tamaño que definimos */
+    height: auto;
+    border-radius: 8px;  /* Opcional: redondea las esquinas de la imagen */
+}
+
+/* Nombre del anime a la derecha de la imagen */
+.anime-title {
+    flex-grow: 1;
+    font-size: 30px;
+    color: var(--text-color);
+    font-weight: bold;
+    padding: 1px;
+    border-radius: 10px;  /* Opcional: redondea las esquinas del contenedor del texto */
+}
+
+/* Botones de navegación (si los usas) */
+.slider-navigation button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.slider-navigation .prev {
+    left: 10px;
+}
+
+.slider-navigation .next {
+    right: 10px;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .slider {
+        max-width: 100%;
+    }
+
+    .anime-image {
+        width: 40%; /* En pantallas más pequeñas, reducimos el tamaño de la imagen */
+    }
+
+    .anime-title {
+        font-size: 18px; /* Reducimos el tamaño del texto en pantallas pequeñas */
+    }
+    .anime-description {
+        font-size: 30px;
+        color: #ddd;
+        padding: 30px;  /* Añadimos el mismo padding que el título para alinearlo */
+        font-style: italic;
+    }
+}
